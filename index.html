@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHIẾN THẦN TRUY VẤN - NỀN TẢNG HỌC TẬP SỐ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #38bdf8;
+            --secondary: #94a3b8;
+            --accent-olm: #00ff88;
+            --success: #10b981;
+            --danger: #ff4757;
+            --dark: #0f172a;
+            --gold: #ffcf33;
+            --hocmai-orange: #ff6600;
+        }
+
+        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); scroll-behavior: smooth; }
+
+        body {
+            background: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #1e1b4b);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            margin: 0; min-height: 100vh; color: white;
+            padding-top: 60px;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* NAVIGATION BAR */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%; height: 60px;
+            background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(15px);
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; border-bottom: 2px solid var(--primary);
+            padding: 0 50px;
+        }
+        .nav-logo { font-weight: 800; color: var(--primary); font-size: 1.2rem; }
+        .nav-links a { color: white; text-decoration: none; margin: 0 15px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
+        .nav-links a:hover { color: var(--gold); }
+
+        /* HEADER & BANNER */
+        header {
+            position: relative; padding: 100px 20px; text-align: center;
+            background-image: url('background.png');
+            background-size: cover; background-position: center;
+        }
+        header::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(15, 23, 42, 0.7); }
+        header .content { position: relative; z-index: 2; }
+        header h1 { font-size: 4.5rem; font-weight: 900; margin: 0; text-shadow: 0 10px 20px rgba(0,0,0,0.5), 0 0 20px var(--primary); }
+        header p { color: var(--gold); font-size: 1.5rem; letter-spacing: 5px; font-weight: 600; }
+
+        .container { max-width: 1200px; width: 95%; margin: 40px auto; }
+
+        /* LỘ TRÌNH HỌC TẬP */
+        .learning-path {
+            display: flex; justify-content: space-around; align-items: center; margin-bottom: 60px;
+            background: rgba(255,255,255,0.05); padding: 30px 15px; border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .path-step { text-align: center; flex: 1; position: relative; }
+        .path-step span { display: block; font-size: 50px; margin-bottom: 15px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); }
+        .path-step b { display: block; font-size: 1rem; color: white; text-transform: uppercase; margin-bottom: 5px; }
+        .path-step p { font-size: 0.85rem; color: #cbd5e1; margin: 0; }
+        .path-arrow { color: #64748b; font-size: 1.2rem; font-weight: 800; margin: 0 5px; }
+
+        /* GRID BÀI HỌC */
+        #menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .lesson-card {
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px; border-radius: 20px; cursor: pointer; text-align: center;
+        }
+        .lesson-card:hover { transform: translateY(-10px); border-color: var(--primary); background: rgba(56,189,248,0.15); box-shadow: 0 10px 30px rgba(56,189,248,0.2); }
+        .lesson-card h3 { color: white; font-size: 1.5rem; }
+        .lesson-card .badge { color: var(--gold); border: 1px solid var(--gold); padding: 4px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 800; }
+
+        /* TÀI LIỆU THAM KHẢO */
+        .resources-section {
+            margin-top: 60px; background: rgba(15, 23, 42, 0.8); padding: 40px; border-radius: 30px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); text-align: left;
+        }
+        .resources-section h2 { color: var(--gold); border-bottom: 2px solid var(--primary); padding-bottom: 15px; font-size: 1.5rem; margin-top: 30px; }
+        .resource-list { list-style-type: disc; padding-left: 25px; line-height: 1.8; margin-top: 20px; }
+        .resource-list > li { margin-bottom: 25px; font-size: 1.1rem; font-weight: 600; color: white; }
+        .resource-list a { color: var(--primary); text-decoration: underline; font-weight: 600; }
+        .resource-list a:hover { color: var(--accent-olm); }
+
+        /* VINH DANH CHIẾN THẦN */
+        .leaderboard { margin-top: 60px; background: rgba(0,0,0,0.3); padding: 40px; border-radius: 30px; border: 1px solid var(--gold); }
+        .leaderboard h2 { text-align: center; color: var(--gold); margin-bottom: 30px; }
+        .rank-item { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+        /* MUSIC CONTROL */
+        #music-control {
+            position: fixed; bottom: 30px; left: 30px; z-index: 2000;
+            background: var(--dark); border: 2px solid var(--primary);
+            padding: 15px; border-radius: 50%; cursor: pointer; box-shadow: 0 0 20px var(--primary);
+            display: flex; justify-content: center; align-items: center; width: 55px; height: 55px;
+        }
+
+        /* FOOTER */
+        footer { background: #0a0f1a; padding: 60px 20px; border-top: 3px solid var(--primary); margin-top: 80px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; text-align: left; }
+        .footer-col h4 { color: var(--primary); margin-bottom: 20px; text-transform: uppercase; }
+        .footer-col p { font-size: 0.9rem; color: #94a3b8; line-height: 1.8; }
+
+        /* GAME AREA */
+        #game-area {
+            display: none; background: #0f172a; padding: 60px; border-radius: 30px;
+            border: 2px solid var(--primary); text-align: center; max-width: 800px; margin: 0 auto; box-shadow: 0 0 40px rgba(56,189,248,0.3);
+        }
+        .term-display { font-size: 4rem; font-weight: 900; margin: 30px 0; text-shadow: 0 0 15px var(--primary); }
+        .option-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); padding: 18px; border-radius: 12px; width: 100%; color: white; margin-bottom: 15px; cursor: pointer; font-size: 1.2rem; }
+        .option-btn:hover { background: var(--primary); color: var(--dark); }
+    </style>
+</head>
+<body>
+
+<audio id="bg-music" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3"></audio>
+<audio id="sound-correct" src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio>
+<audio id="sound-wrong" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-preview.mp3"></audio>
+<audio id="sound-win" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3"></audio>
+
+<div id="music-control" onclick="toggleMusic()">🔇</div>
+
+<nav>
+    <div class="nav-logo">CHIẾN THẦN TRUY VẤN</div>
+    <div class="nav-links">
+        <a href="#">Trang chủ</a>
+        <a href="#menu">Chiến trường</a>
+        <a href="#resources">Tài liệu</a>
+        <a href="https://olm.vn/bg/chuyen-de-co-so-du-lieu-song-ngu-anh-viet-74346" target="_blank">Luyện binh OLM</a>
+    </div>
+</nav>
+
+<header>
+    <div class="content">
+        <h1>CHIẾN THẦN TRUY VẤN</h1>
+        <p>HỌC ĐỂ DẪN ĐẦU - CHINH PHỤC DỮ LIỆU</p>
+        <button onclick="document.getElementById('menu').scrollIntoView()" style="background:var(--hocmai-orange); color:white; border:none; padding:15px 40px; border-radius:10px; font-weight:800; cursor:pointer; margin-top:20px; box-shadow: 0 5px 15px rgba(255,102,0,0.4);">THAM GIA CHIẾN DỊCH</button>
+    </div>
+</header>
+
+<div class="container" id="main-ui">
+    
+    <div class="learning-path">
+        <div class="path-step"><span>🎯</span><b>KHỞI ĐỘNG</b><p>Làm quen CSDL</p></div>
+        <div class="path-arrow">➔</div>
+        <div class="path-step"><span>🧱</span><b>XÂY NỀN</b><p>Khóa & Ràng buộc</p></div>
+        <div class="path-arrow">➔</div>
+        <div class="path-step"><span>⚔️</span><b>VƯỢT CHƯỚNG</b><p>Làm chủ SQL</p></div>
+        <div class="path-arrow">➔</div>
+        <div class="path-step"><span>🚀</span><b>TĂNG TỐC</b><p>Thao tác nâng cao</p></div>
+        <div class="path-arrow">➔</div>
+        <div class="path-step"><span>🏆</span><b>VỀ ĐÍCH</b><p>Chiến thần Truy vấn</p></div>
+    </div>
+
+    <div id="menu">
+        <div class="lesson-card" onclick="startGame(0)"><span class="badge">CHƯƠNG 1</span><h3>ẢI 1</h3><p>TỔNG QUAN CƠ SỞ DỮ LIỆU</p></div>
+        <div class="lesson-card" onclick="startGame(1)"><span class="badge">CHƯƠNG 2</span><h3>ẢI 2</h3><p>KHÓA & RÀNG BUỘC</p></div>
+        <div class="lesson-card" onclick="startGame(2)"><span class="badge">CHƯƠNG 3</span><h3>ẢI 3</h3><p>NGÔN NGỮ TRUY VẤN SQL</p></div>
+        <div class="lesson-card" onclick="startGame(3)"><span class="badge">CHƯƠNG 4</span><h3>ẢI 4</h3><p>THAO TÁC NÂNG CAO</p></div>
+        <div class="lesson-card" onclick="startGame(4)"><span class="badge">CHƯƠNG 5</span><h3>ẢI 5</h3><p>QUẢN TRỊ & BẢO MẬT</p></div>
+    </div>
+
+    <div class="resources-section" id="resources">
+        <h2>1. Trang web thực hành & Học tập SQL trực tuyến</h2>
+        <ul class="resource-list">
+            <li><a href="https://www.w3resource.com/sql-exercises/" target="_blank">w3resource</a>: Hệ thống bài tập SQL phong phú giúp rèn luyện kỹ năng thực tế.</li>
+            <li><a href="https://learnsql.com/" target="_blank">LearnSQL.com</a>: Nền tảng học SQL tương tác hiện đại và trực quan.</li>
+            <li><a href="https://iqratechnology.com/" target="_blank">Iqra Technology Academy</a>: Chuyên trang đào tạo và cung cấp kiến thức công nghệ dữ liệu chuyên sâu.</li>
+            <li><a href="https://www.reddit.com/r/SQL/" target="_blank">Nguồn cộng đồng (Reddit)</a>: Nơi thảo luận và giải đáp thắc mắc từ cộng đồng SQL thế giới.</li>
+        </ul>
+
+        <h2>2. Sách & Tài liệu nghiên cứu chuyên sâu</h2>
+        <ul class="resource-list">
+            <li>
+                <a href="https://open.umn.edu/opentextbooks/textbooks/database-design-2nd-edition" target="_blank">Open Textbook Library (Database Design - 2nd Edition)</a>: 
+                Một cuốn giáo trình cực hay cho người mới bắt đầu.
+            </li>
+            <li>
+                <a href="https://github.com/EbookFoundation/free-programming-books/blob/main/books/free-programming-books-langs.md#database" target="_blank">Danh sách sách Database miễn phí (GitHub)</a>: 
+                Tổng hợp hàng trăm link sách về SQL, NoSQL, tối ưu hóa...
+            </li>
+            <li>
+                <a href="http://www.redbook.io/" target="_blank">The Red Book (Readings in Database Systems)</a>: 
+                Tập hợp các bài báo khoa học quan trọng nhất về hệ thống CSDL.
+            </li>
+        </ul>
+    </div>
+
+    <div class="leaderboard" id="leaderboard">
+        <h2>🏆 BẢNG VINH DANH CHIẾN THẦN</h2>
+        <div id="leaderboard-list"></div>
+    </div>
+</div>
+
+<div id="game-area" class="container">
+    <div style="display:flex; justify-content:space-between; font-weight:800; color:var(--gold);">
+        <span id="score-display">ĐIỂM CHIẾN: 0</span>
+        <span id="combo-display">COMBO x1</span>
+    </div>
+    <div id="word-en" class="term-display">QUERY</div>
+    <div id="option-box"></div>
+    <button onclick="location.reload()" style="margin-top:20px; background:none; border:1px solid #333; color:white; cursor:pointer; padding:12px 25px; border-radius:10px; font-weight:bold;">RÚT QUÂN (THOÁT)</button>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h4>CHIẾN THẦN TRUY VẤN</h4>
+            <p>Nền tảng học Tiếng Anh chuyên ngành CSDL dành cho học sinh THPT. Phát triển bởi đội ngũ GV THPT A Hải Hậu & THPT Bình Minh, tỉnh Ninh Bình</p>
+        </div>
+        <div class="footer-col">
+            <h4>LIÊN HỆ</h4>
+            <p>📍 Địa chỉ: Ninh Bình<br>📧 Email: hotro@chienthan.vn <br> thuyvth.tin@gmail.com <br> duyenvubm@gmail.com</p>
+        </div>
+    </div>
+    <p style="text-align:center; margin-top:40px; color:#444;">© 2026 CHIẾN THẦN TRUY VẤN</p>
+</footer>
+
+<script>
+// QUẢN LÝ NHẠC
+const bgMusic = document.getElementById('bg-music');
+let isPlaying = false;
+function toggleMusic() {
+    if (isPlaying) { bgMusic.pause(); document.getElementById('music-control').innerText = "🔇"; }
+    else { bgMusic.play(); document.getElementById('music-control').innerText = "🔊"; }
+    isPlaying = !isPlaying;
+}
+
+// BẢNG VINH DANH NGẪU NHIÊN
+function loadLeaderboard() {
+    const names = ["Nguyễn Văn An", "Trần Thị Bình", "Lê Minh Chúc", "Phạm Hoàng Duy", "Vũ Thu Thảo", "Ngô Quốc Khánh", "Đặng Thu Hà", "Trần Minh Tuấn"];
+    const container = document.getElementById('leaderboard-list');
+    if(!container) return;
+    container.innerHTML = ""; 
+    let data = names.map(name => ({
+        name: name,
+        score: Math.floor(Math.random() * (1000 - 500 + 1)) + 500
+    }));
+    data.sort((a, b) => b.score - a.score);
+    data.slice(0, 5).forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'rank-item';
+        div.innerHTML = `<span>${index + 1}. ${item.name}</span><span>${item.score} Điểm</span>`;
+        container.appendChild(div);
+    });
+}
+window.addEventListener('load', loadLeaderboard);
+
+// DỮ LIỆU TỪ VỰNG & LOGIC TRÒ CHƠI
+const lessons = [[{en:"Database",vi:"Cơ sở dữ liệu",alt:["Máy chủ","Trình duyệt","Mã nguồn"]},{en:"Table",vi:"Bảng dữ liệu",alt:["Tệp tin","Thư mục","Mật mã"]},{en:"Record",vi:"Bản ghi (Hàng)",alt:["Cột","Ô","Khóa"]},{en:"Field",vi:"Trường (Cột)",alt:["Hàng","Bảng","Giá trị"]},{en:"Schema",vi:"Lược đồ",alt:["Bản vẽ","Hình ảnh","Máy tính"]},{en:"Metadata",vi:"Siêu dữ liệu",alt:["Dữ liệu lỗi","Mật mã","Dữ liệu thô"]},{en:"Data Type",vi:"Kiểu dữ liệu",alt:["Kích thước","Tên biến","Định dạng"]},{en:"Attribute",vi:"Thuộc tính",alt:["Hành động","Hàm số","Giá trị"]},{en:"Tuple",vi:"Bộ dữ liệu",alt:["Mảng","Đối tượng","Danh sách"]},{en:"Relation",vi:"Quan hệ",alt:["Kết nối","Giao diện","Thành phần"]},{en:"Data Warehouse",vi:"Kho dữ liệu",alt:["Ổ cứng","Đám mây","Máy chủ"]},{en:"Big Data",vi:"Dữ liệu lớn",alt:["Dữ liệu nhỏ","Dữ liệu rác","Dữ liệu mật"]},{en:"Flat File",vi:"Tệp phẳng",alt:["Tệp nén","Tệp ẩn","Tệp hệ thống"]},{en:"Redundancy",vi:"Sự dư thừa",alt:["Sự thiếu hụt","Sự nén","Bảo mật"]},{en:"Consistency",vi:"Tính nhất quán",alt:["Tính rời rạc","Tính mở","Lặp lại"]},{en:"Inconsistency",vi:"Không nhất quán",alt:["Chính xác","Bền vững","Bảo mật"]},{en:"Instance",vi:"Thực thể/Hiện hữu",alt:["Mẫu thử","Lỗi máy","Yêu cầu"]},{en:"Abstraction",vi:"Trừu tượng hóa",alt:["Cụ thể","Xóa bỏ","Mã hóa"]},{en:"Hierarchy",vi:"Phân cấp",alt:["Đồng cấp","Tự do","Rời rạc"]},{en:"Storage",vi:"Lưu trữ",alt:["Xử lý","Mã hóa","Truyền tải"]}],[{en:"Primary Key",vi:"Khóa chính",alt:["Khóa phụ","Khóa ngoại","Khóa ảo"]},{en:"Foreign Key",vi:"Khóa ngoại",alt:["Khóa chính","Khóa đơn","Khóa mật"]},{en:"Candidate Key",vi:"Khóa dự tuyển",alt:["Khóa chính thức","Khóa rác","Khóa bí mật"]},{en:"Composite Key",vi:"Khóa tổ hợp",alt:["Khóa đơn","Khóa phụ","Khóa ẩn"]},{en:"Constraint",vi:"Ràng buộc",alt:["Tự do","Mở rộng","Liên kết"]},{en:"Integrity",vi:"Tính toàn vẹn",alt:["Bảo mật","Tính mở","Đa dạng"]},{en:"Unique",vi:"Duy nhất",alt:["Phổ biến","Nhiều hàng","Công khai"]},{en:"Null Value",vi:"Giá trị rỗng",alt:["Giá trị 0","Giá trị sai","Mặc định"]},{en:"Validation",vi:"Xác thực",alt:["Xóa bỏ","Mã hóa","Lưu trữ"]},{en:"Referential",vi:"Tham chiếu",alt:["Chuyển đổi","Kết nối","Sửa lỗi"]},{en:"Domain",vi:"Miền giá trị",alt:["Địa chỉ","Trang web","Tên miền"]},{en:"Cardinality",vi:"Bản số",alt:["Kích thước","Phân loại","Định dạng"]},{en:"Super Key",vi:"Siêu khóa",alt:["Khóa phụ","Khóa ảo","Khóa chính"]},{en:"Relationship",vi:"Mối quan hệ",alt:["Kết nối mạng","Tương tác","Thành phần"]},{en:"One-to-One",vi:"Quan hệ 1-1",alt:["Quan hệ 1-N","Quan hệ ẩn","Quan hệ N-N"]},{en:"One-to-Many",vi:"Quan hệ 1-Nhiều",alt:["Quan hệ 1-1","Quan hệ lặp","Quan hệ N-N"]},{en:"Many-to-Many",vi:"Quan hệ Nhiều-Nhiều",alt:["Quan hệ 1-1","Quan hệ đơn","Quan hệ 1-N"]},{en:"Mandatory",vi:"Bắt buộc",alt:["Tùy chọn","Cố định","Bị cấm"]},{en:"Optional",vi:"Tùy chọn",alt:["Bắt buộc","Cố định","Cần thiết"]},{en:"Dependency",vi:"Sự phụ thuộc",alt:["Sự độc lập","Sự rời rạc","Sự liên kết"]}],[{en:"Query",vi:"Truy vấn",alt:["Tìm lỗi","Cài đặt","Yêu cầu xóa"]},{en:"SQL",vi:"Ngôn ngữ truy vấn",alt:["Ngôn ngữ máy","Web","Hệ điều hành"]},{en:"Select",vi:"Lấy dữ liệu",alt:["Xóa","Thêm","Sửa"]},{en:"Insert",vi:"Chèn dữ liệu",alt:["Lọc","Xóa","Tìm"]},{en:"Update",vi:"Cập nhật",alt:["Xóa","Tải về","Sao lưu"]},{en:"Delete",vi:"Xóa dữ liệu",alt:["Lưu","Chèn","Sửa"]},{en:"Statement",vi:"Câu lệnh",alt:["Lời chào","Báo cáo","Ghi chú"]},{en:"Clause",vi:"Mệnh đề",alt:["Kết quả","Tiêu đề","Điều kiện"]},{en:"Order By",vi:"Sắp xếp theo",alt:["Lọc theo","Nhóm theo","Tìm theo"]},{en:"Group By",vi:"Nhóm theo",alt:["Sắp xếp theo","Lưu theo","Xóa theo"]},{en:"Having",vi:"Điều kiện nhóm",alt:["Điều kiện lọc","Kết nối","Sắp xếp"]},{en:"Join",vi:"Phép nối",alt:["Phép cộng","Phép lọc","Phép chia"]},{en:"Distinct",vi:"Duy nhất/Phân biệt",alt:["Lặp lại","Bất kỳ","Tất cả"]},{en:"Union",vi:"Phép hợp",alt:["Phép giao","Phép nối","Phép trừ"]},{en:"Alias",vi:"Bí danh",alt:["Tên thật","Đường dẫn","Mật khẩu"]},{en:"Aggregate",vi:"Hàm tổng hợp",alt:["Hàm toán học","Hàm ngày","Hàm chuỗi"]},{en:"Wildcard",vi:"Ký tự đại diện",alt:["Ký tự đặc biệt","Chữ số","Mật mã"]},{en:"Nested Query",vi:"Truy vấn lồng",alt:["Truy vấn đơn","Truy vấn ẩn","Truy vấn lỗi"]},{en:"DDL",vi:"Định nghĩa dữ liệu",alt:["Thao tác dữ liệu","Mã nguồn","Máy tính"]},{en:"DML",vi:"Thao tác dữ liệu",alt:["Định nghĩa dữ liệu","Thiết kế","Máy tính"]}],[{en:"Index",vi:"Chỉ mục",alt:["Số trang","Mục lục","Ký hiệu"]},{en:"Trigger",vi:"Trình kích hoạt",alt:["Nút bấm","Lỗi","Cảnh báo"]},{en:"Stored Procedure",vi:"Thủ tục lưu trữ",alt:["Hàm xử lý","Cài đặt","Bản sao"]},{en:"View",vi:"Bảng ảo",alt:["Hình ảnh","Thư mục","Giao diện"]},{en:"Normalization",vi:"Chuẩn hóa",alt:["Nén","Giải nén","Phân tích"]},{en:"Denormalization",vi:"Phi chuẩn hóa",alt:["Chuẩn hóa","Mã hóa","Nén"]},{en:"Inner Join",vi:"Nối trong",alt:["Nối ngoài","Nối phải","Nối trái"]},{en:"Left Join",vi:"Nối trái",alt:["Nối phải","Nối chéo","Nối trong"]},{en:"Right Join",vi:"Nối phải",alt:["Nối trái","Nối ẩn","Nối trong"]},{en:"Transaction",vi:"Giao dịch",alt:["Sửa đổi","Tính toán","Chuyển tiền"]},{en:"Commit",vi:"Xác nhận",alt:["Hủy bỏ","Xóa bỏ","Lưu tạm"]},{en:"Rollback",vi:"Hoàn tác",alt:["Xác nhận","Xóa sạch","Sửa lỗi"]},{en:"Concurrency",vi:"Sự đồng thời",alt:["Sự rời rạc","Sự lặp lại","Sự chậm trễ"]},{en:"Locking",vi:"Khóa dữ liệu",alt:["Xóa dữ liệu","Sao lưu","Mã hóa"]},{en:"Deadlock",vi:"Tắc nghẽn",alt:["Kết nối nhanh","Bảo trì","Lỗi mạng"]},{en:"Execution Plan",vi:"Kế hoạch thực thi",alt:["Bảo mật","Lưu trữ","Kế hoạch xóa"]},{en:"Data Mining",vi:"Khai thác dữ liệu",alt:["Xóa dữ liệu","Nhập dữ liệu","Nén dữ liệu"]},{en:"Aggregation",vi:"Sự tổng hợp",alt:["Sự phân chia","Sự lặp lại","Sự xóa bỏ"]},{en:"Filter",vi:"Bộ lọc",alt:["Bộ nén","Bộ truyền","Bộ xóa"]},{en:"Sorting",vi:"Sắp xếp",alt:["Lưu trữ","Xóa bỏ","Mã hóa"]}],[{en:"Backup",vi:"Sao lưu",alt:["Xóa","Tải về","Phục hồi"]},{en:"Restore",vi:"Phục hồi",alt:["Xóa sạch","Cài lại","Lưu trữ"]},{en:"DBA",vi:"Quản trị viên",alt:["Hacker","Thiết kế","Người dùng"]},{en:"Encryption",vi:"Mã hóa",alt:["Giải nén","Xóa tệp","Dịch văn bản"]},{en:"Privilege",vi:"Quyền truy cập",alt:["Mật khẩu","Tài khoản","Thông báo"]},{en:"Grant",vi:"Cấp quyền",alt:["Thu hồi quyền","Ẩn quyền","Xóa quyền"]},{en:"Revoke",vi:"Thu hồi quyền",alt:["Cấp quyền","Sửa quyền","Cho phép"]},{en:"Log File",vi:"Tệp nhật ký",alt:["Tệp ảnh","Tệp hệ thống","Tệp rác"]},{en:"Recovery",vi:"Sự khôi phục",alt:["Sự xóa bỏ","Sự nén","Hư hỏng"]},{en:"Security",vi:"Bảo mật",alt:["Công khai","Tự do","Dễ vỡ"]},{en:"Authorization",vi:"Sự cấp phép",alt:["Từ chối","Truy cập","Xóa bỏ"]},{en:"Authentication",vi:"Xác thực",alt:["Lừa đảo","Đăng xuất","Ẩn danh"]},{en:"Firewall",vi:"Tường lửa",alt:["Diệt virus","Trình duyệt","Hệ điều hành"]},{en:"Mirroring",vi:"Soi bóng",alt:["Xóa bỏ","Nén","Cắt ghép"]},{en:"Scalability",vi:"Mở rộng",alt:["Thu hẹp","Độ bền","Độ cứng"]},{en:"Availability",vi:"Sẵn sàng",alt:["Bảo mật","Rời rạc","Hư hỏng"]},{en:"DBMS",vi:"Hệ quản trị CSDL",alt:["Phần cứng","Ứng dụng","Hệ điều hành"]},{en:"NoSQL",vi:"CSDL phi quan hệ",alt:["Có cấu trúc","CSDL mật","Cấu trúc cũ"]},{en:"Cloud Database",vi:"CSDL đám mây",alt:["Ngoại tuyến","Ổ cứng","Cục bộ"]},{en:"Isolation",vi:"Sự cô lập",alt:["Kết nối","Đồng bộ","Chia sẻ"]}]];
+
+let score=0, combo=1, currentWords=[], currentIndex=0;
+
+function startGame(i) {
+    document.getElementById('main-ui').style.display='none';
+    document.getElementById('game-area').style.display='block';
+    currentWords=[...lessons[i]].sort(()=>Math.random()-0.5);
+    currentIndex=0; score=0; combo=1; updateUI(); loadNext();
+}
+
+function loadNext() {
+    if(currentIndex>=currentWords.length){ 
+        document.getElementById('sound-win').play(); 
+        alert("CHIẾN THẮNG! Điểm chiến: "+score); 
+        location.reload(); return; 
+    }
+    const d=currentWords[currentIndex]; document.getElementById('word-en').innerText=d.en;
+    const box=document.getElementById('option-box'); box.innerHTML="";
+    const opts=[d.vi,...d.alt].sort(()=>Math.random()-0.5);
+    opts.forEach(o=>{
+        const b=document.createElement('button'); b.className='option-btn'; b.innerText=o;
+        b.onclick=()=>{
+            if(o===d.vi){
+                document.getElementById('sound-correct').play(); 
+                score+=(10*combo); combo++; 
+                b.style.background="var(--success)"; b.style.color="var(--dark)";
+                setTimeout(()=>{currentIndex++; loadNext();}, 600);
+            }else{
+                document.getElementById('sound-wrong').play(); 
+                combo=1; b.style.background="var(--danger)";
+                setTimeout(()=>{b.style.background="rgba(255,255,255,0.05)";}, 400);
+            }
+            updateUI();
+        };
+        box.appendChild(b);
+    });
+}
+
+function updateUI() {
+    document.getElementById('score-display').innerText="CHIẾN TÍCH: "+score;
+    document.getElementById('combo-display').innerText="COMBO x"+combo;
+}
+</script>
+</body>
+</html>
